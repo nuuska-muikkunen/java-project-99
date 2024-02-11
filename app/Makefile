@@ -1,32 +1,35 @@
-setup:
-	./gradlew wrapper --gradle-version 8.5
-	./gradlew build
+DEFAULT_GOAL := build-run
 
-app:
-	./gradlew bootRun --args='--spring.profiles.active=dev'
+setup:
+        gradle wrapper --gradle-version 8.5
 
 clean:
-	./gradlew clean
+        ./gradlew clean
 
 build:
-	./gradlew clean build
-
-dev: app
-
-reload-classes:
-	./gradlew -t classes
+        ./gradlew clean build
 
 install:
-	./gradlew installDist
+        ./gradlew clean install
+
+run-dist:
+        ./build/install/app/bin/app
+
+run:
+        ./gradlew run
 
 test:
-	./gradlew test
+        ./gradlew test
 
 report:
-	./gradlew jacocoTestReport
+        ./gradlew jacocoTestReport
 
-check-java-deps:
-	./gradlew dependencyUpdates -Drevision=release
+lint:
+        ./gradlew checkstyleMain
+
+check-deps:
+        ./gradlew dependencyUpdates -Drevision=release
+
+build-run: build run
 
 .PHONY: build
-
