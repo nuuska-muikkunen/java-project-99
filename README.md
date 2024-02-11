@@ -16,5 +16,5 @@ https://java-project-99-3hfo.onrender.com/
 ### [![Actions Status](https://github.com/nuuska-muikkunen/java-project-99/actions/workflows/my-java-CI.yml/badge.svg)](https://github.com/nuuska-muikkunen/java-project-99/actions)
 
 ### Code Climate Badges
-### [![Maintainability](https://api.codeclimate.com/v1/badges/59a29d6f2a170df45a63/maintainability)](https://codeclimate.com/github/nuuska-muikkunen/java-project-72/maintainability)
-### [![Test Coverage](https://api.codeclimate.com/v1/badges/59a29d6f2a170df45a63/test_coverage)](https://codeclimate.com/github/nuuska-muikkunen/java-project-72/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/af29e0c55397eb008073/maintainability)](https://codeclimate.com/github/nuuska-muikkunen/java-project-99/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/af29e0c55397eb008073/test_coverage)](https://codeclimate.com/github/nuuska-muikkunen/java-project-99/test_coverage)
