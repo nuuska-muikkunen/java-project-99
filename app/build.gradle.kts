@@ -1,11 +1,15 @@
 plugins {
-	java
+	application
 	id("org.springframework.boot") version "3.2.2"
 	id("io.spring.dependency-management") version "1.1.4"
 }
 
 group = "hexlet.code"
 version = "0.0.1-SNAPSHOT"
+
+application {
+	mainClass.set("hexlet.code.AppApplication")
+}
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_20
