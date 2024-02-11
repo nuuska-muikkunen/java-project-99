@@ -1,5 +1,5 @@
 setup:
-	./gradlew wrapper --gradle-version 8.3
+	./gradlew wrapper --gradle-version 8.5
 	./gradlew build
 
 app:
@@ -21,6 +21,9 @@ install:
 
 test:
 	./gradlew test
+
+report:
+	./gradlew jacocoTestReport
 
 check-java-deps:
 	./gradlew dependencyUpdates -Drevision=release
