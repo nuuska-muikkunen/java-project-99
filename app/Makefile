@@ -1,7 +1,11 @@
 DEFAULT_GOAL := build-run
 
 setup:
-	gradle wrapper --gradle-version 8.5
+	./gradle wrapper --gradle-version 8.5
+	./gradlew build
+
+app:
+	./gradlew bootRun --args='--spring.profiles.active=dev'
 
 clean:
 	./gradlew clean
@@ -10,7 +14,7 @@ build:
 	./gradlew clean build
 
 install:
-	./gradlew clean install
+	./gradlew installDist
 
 run-dist:
 	./build/install/app/bin/app
@@ -29,9 +33,6 @@ lint:
 
 check-deps:
 	./gradlew dependencyUpdates -Drevision=release
-
-build-run:
-	build run
 
 .PHONY:
 	build
