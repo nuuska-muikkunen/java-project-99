@@ -20,6 +20,11 @@ java {
         sourceCompatibility = JavaVersion.VERSION_20
 }
 
+checkstyle {
+    configFile = file("config/checkstyle/checkstyle.xml");
+    toolVersion = "10.13.0";    // your choice here
+}
+
 configurations {
         compileOnly {
                 extendsFrom(configurations.annotationProcessor.get())
@@ -36,6 +41,7 @@ dependencies {
         //implementation("org.springframework.boot:spring-boot-starter-security")
         implementation("org.springframework.boot:spring-boot-starter-validation")
         implementation("org.springframework.boot:spring-boot-starter-web")
+        implementation("com.puppycrawl.tools:checkstyle:10.13.0")
         compileOnly("org.projectlombok:lombok")
         testImplementation("org.jacoco:org.jacoco.core:0.8.10")
         runtimeOnly("com.h2database:h2")
