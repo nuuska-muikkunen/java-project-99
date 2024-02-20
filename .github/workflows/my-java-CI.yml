@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    environment: TEST_POSTGRES
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 20
