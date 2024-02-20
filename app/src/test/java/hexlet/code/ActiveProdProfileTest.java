@@ -18,7 +18,7 @@ public class ActiveProdProfileTest {
 
     @Test
     void testProperties() {
-        assertThat(dataSourceUrl).isEqualTo("jdbc:postgresql://localhost:5432/spring");
+        assertThat(dataSourceUrl).isEqualTo("jdbc:postgresql://localhost/spring");
         assertThat(dataSourceUserName).isEqualTo("newcomer");
     }
 
