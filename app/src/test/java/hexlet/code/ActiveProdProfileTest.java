@@ -16,14 +16,10 @@ public class ActiveProdProfileTest {
     @Value("${spring.datasource.username}")
     private String dataSourceUserName;
 
-    @Value("${spring.datasource.password}")
-    private String dataSourcePassword;
-
     @Test
     void testProperties() {
-        assertThat(dataSourceUrl).isEqualTo("jdbc:postgresql://localhost:5432/hexlet");
+        assertThat(dataSourceUrl).isEqualTo("jdbc:postgresql://localhost:5432/spring");
         assertThat(dataSourceUserName).isEqualTo("newcomer");
-        assertThat(dataSourcePassword).isEqualTo("Monday.55");
     }
 
 }

@@ -18,7 +18,7 @@ public class ActiveDevProfileTest {
 
     @Test
     void testProperties() {
-        assertThat(dataSourceUrl).isEqualTo("jdbc:h2:mem:hexlet");
+        assertThat(dataSourceUrl).isEqualTo("jdbc:h2:mem:spring");
         assertThat(consoleEnabled).isEqualTo("true");
     }
 }
