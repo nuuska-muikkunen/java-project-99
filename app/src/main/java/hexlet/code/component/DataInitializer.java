@@ -1,7 +1,7 @@
 package hexlet.code.component;
 
-import hexlet.code.dto.UserCreateDTO;
 import hexlet.code.mapper.UserMapper;
+import hexlet.code.model.User;
 import hexlet.code.repository.UserRepository;
 import hexlet.code.service.CustomUserDetailsService;
 import lombok.AllArgsConstructor;
@@ -27,11 +27,10 @@ public class DataInitializer implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         var email = "hexlet@example.com";
         if (userRepository.findByEmail(email).isEmpty()) {
-            var userData = new UserCreateDTO();
+            var userData = new User();
             userData.setEmail(email);
-            userData.setPassword("qwerty");
-            var user = userMapper.map(userData);
-            userService.createUser(user);
+            userData.setPasswordDigest("qwerty");
+            userService.createUser(userData);
         }
      }
 

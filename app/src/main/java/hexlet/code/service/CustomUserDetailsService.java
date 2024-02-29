@@ -1,6 +1,5 @@
 package hexlet.code.service;
 
-import hexlet.code.mapper.UserMapper;
 import hexlet.code.model.User;
 import hexlet.code.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,6 @@ public class CustomUserDetailsService implements UserDetailsManager {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private UserMapper userMapper;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -35,8 +31,6 @@ public class CustomUserDetailsService implements UserDetailsManager {
         user.setEmail(userData.getUsername());
         var hashedPassword = passwordEncoder.encode(userData.getPassword());
         user.setPasswordDigest(hashedPassword);
-        user.setFirstName("hexlet");
-        user.setLastName("java");
         userRepository.save(user);
     }
 

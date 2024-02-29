@@ -9,8 +9,8 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,11 +41,11 @@ public class User implements UserDetails, BaseEntity {
     private String email;
 
     @Column(name = "created_at")
-    @CreationTimestamp
+    @CreatedDate
     private LocalDate createdAt;
 
     @Column(name = "updated_at")
-    @UpdateTimestamp
+    @LastModifiedDate
     private LocalDate updatedAt;
 
     private String passwordDigest;

@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class UserControllerTest {
-@Autowired
+    @Autowired
     private MockMvc mockMvc;
 
     @Autowired
@@ -49,10 +49,13 @@ public class UserControllerTest {
 
     private User testUser;
 
+    @Autowired
+    private UserController userController;
+
     @BeforeEach
     public void setUp() {
-        token = jwt().jwt(builder -> builder.subject("hexlet@example.com"));
         testUser = Instancio.of(modelGenerator.getUserModel()).create();
+        token = jwt().jwt(builder -> builder.subject(testUser.getUsername()));
         userRepository.save(testUser);
     }
 
@@ -91,6 +94,7 @@ public class UserControllerTest {
         dto.setLastName("hexlet");
 
         var request = post("/api/users")
+                .with(token)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(om.writeValueAsString(dto));
 
@@ -115,7 +119,8 @@ public class UserControllerTest {
         dto.setEmail(JsonNullable.of("python@python.com"));
         dto.setPassword(JsonNullable.of("12345678"));
 
-        var request = put("/api/users/{id}", testUser.getId()).with(token)
+        var request = put("/api/users/{id}", testUser.getId())
+                .with(token)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(om.writeValueAsString(dto));
 
@@ -131,13 +136,12 @@ public class UserControllerTest {
 
     @Test
     public void testDestroy() throws Exception {
-        var anotherUser = Instancio.of(modelGenerator.getUserModel()).create();
-        userRepository.save(anotherUser);
-        var request = delete("/api/users/{id}", anotherUser.getId()).with(token);
+        var request = delete("/api/users/{id}", testUser.getId())
+                .with(token);
         mockMvc.perform(request)
                 .andExpect(status().isNoContent());
 
-        assertThat(userRepository.existsById(anotherUser.getId())).isEqualTo(false);
+        assertThat(userRepository.existsById(testUser.getId())).isEqualTo(false);
     }
 
 }
