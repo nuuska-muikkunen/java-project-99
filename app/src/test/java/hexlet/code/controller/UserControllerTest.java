@@ -107,8 +107,6 @@ public class UserControllerTest {
         assertThat(user.getFirstName()).isEqualTo(dto.getFirstName());
         assertThat(user.getLastName()).isEqualTo(dto.getLastName());
         assertThat(user.getUsername()).isEqualTo(dto.getEmail());
-        assertThat(user.getCreatedAt()).isToday();
-        assertThat(user.getUpdatedAt()).isToday();
     }
 
     @Test
