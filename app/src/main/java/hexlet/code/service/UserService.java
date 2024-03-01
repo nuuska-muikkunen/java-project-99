@@ -15,10 +15,10 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-private UserRepository userRepository;
+    private UserRepository userRepository;
 
-@Autowired
-private UserMapper userMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     public List<UserDTO> getAll() {
         var users = userRepository.findAll()
