@@ -1,5 +1,7 @@
 package hexlet.code.util;
 
+import hexlet.code.model.Label;
+import hexlet.code.model.Task;
 import hexlet.code.model.TaskStatus;
 import hexlet.code.model.User;
 import jakarta.annotation.PostConstruct;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Component;
 public class ModelGenerator {
     private Model<User> userModel;
     private Model<TaskStatus> taskStatusModel;
+    private Model<Task> taskModel;
+    private Model<Label> labelModel;
 
     private Faker faker = new Faker();
 
@@ -32,6 +36,20 @@ public class ModelGenerator {
                 .ignore(Select.field(TaskStatus::getId))
                 .supply(Select.field(TaskStatus::getName), () -> faker.chess().title())
                 .supply(Select.field(TaskStatus::getSlug), () -> faker.internet().slug())
+                .toModel();
+
+        labelModel = Instancio.of(Label.class)
+                .ignore(Select.field(Label::getId))
+                .ignore(Select.field(Label::getTasks))
+                .supply(Select.field(Label::getName), () -> faker.community().character())
+                .toModel();
+
+        taskModel = Instancio.of(Task.class)
+                .ignore(Select.field(Task::getId))
+                .ignore(Select.field(Task::getAssignee))
+                .ignore(Select.field(Task::getTaskStatus))
+                .supply(Select.field(Task::getTitle), () -> faker.football().positions())
+                .supply(Select.field(Task::getContent), () -> faker.text().text())
                 .toModel();
     }
 }

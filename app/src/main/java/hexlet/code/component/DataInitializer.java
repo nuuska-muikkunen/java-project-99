@@ -1,7 +1,9 @@
 package hexlet.code.component;
 
+import hexlet.code.model.Label;
 import hexlet.code.model.TaskStatus;
 import hexlet.code.model.User;
+import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.TaskStatusRepository;
 import hexlet.code.repository.UserRepository;
 import hexlet.code.service.CustomUserDetailsService;
@@ -20,6 +22,9 @@ public class DataInitializer implements ApplicationRunner {
 
     @Autowired
     private final UserRepository userRepository;
+
+    @Autowired
+    private final LabelRepository labelRepository;
 
     @Autowired
     private final CustomUserDetailsService userService;
@@ -66,6 +71,13 @@ public class DataInitializer implements ApplicationRunner {
         for (var status: statuses) {
             taskStatusRepository.save(status);
         }
+
+        var labelBug = new Label();
+        labelBug.setName("bug");
+        labelRepository.save(labelBug);
+        var labelFeature = new Label();
+        labelFeature.setName("feature");
+        labelRepository.save(labelFeature);
      }
 
 }

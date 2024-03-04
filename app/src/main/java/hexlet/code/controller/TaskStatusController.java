@@ -1,10 +1,8 @@
 package hexlet.code.controller;
 
-import hexlet.code.dto.TaskStatusCreateDTO;
-import hexlet.code.dto.TaskStatusDTO;
-import hexlet.code.dto.TaskStatusUpdateDTO;
-import hexlet.code.repository.TaskStatusRepository;
-import hexlet.code.repository.UserRepository;
+import hexlet.code.dto.status.TaskStatusCreateDTO;
+import hexlet.code.dto.status.TaskStatusDTO;
+import hexlet.code.dto.status.TaskStatusUpdateDTO;
 import hexlet.code.service.TaskStatusService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -29,12 +27,6 @@ import java.util.List;
 public class TaskStatusController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private TaskStatusRepository taskStatusRepository;
-
-    @Autowired
     private TaskStatusService taskStatusService;
 
     @GetMapping(value = "/task_statuses")
@@ -52,21 +44,18 @@ public class TaskStatusController {
 
     @PostMapping(value = "/task_statuses")
     @ResponseStatus(HttpStatus.CREATED)
-    //@PreAuthorize("@userRepository.findByEmail(authentication.name).get().isEnabled()")
     TaskStatusDTO create(@Valid @RequestBody TaskStatusCreateDTO taskStatusData) {
         return taskStatusService.createTaskStatus(taskStatusData);
     }
 
     @PutMapping(path = "/task_statuses/{id}")
     @ResponseStatus(HttpStatus.OK)
-    //@PreAuthorize("@userRepository.findById(#id).get().getEmail() == authentication.name")
     public TaskStatusDTO update(@Valid @RequestBody TaskStatusUpdateDTO taskStatusData, @PathVariable Long id) {
         return taskStatusService.updateTaskStatus(taskStatusData, id);
     }
 
     @DeleteMapping("/task_statuses/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    //@PreAuthorize("@userRepository.findById(#id).get().getEmail() == authentication.name")
     public void delete(@PathVariable Long id) {
         taskStatusService.deleteTaskStatus(id);
     }

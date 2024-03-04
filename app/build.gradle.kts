@@ -46,7 +46,8 @@ dependencies {
         implementation("org.springframework.boot:spring-boot-devtools")
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
         implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
-        implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+        // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
+        implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
         implementation("org.mapstruct:mapstruct:1.5.5.Final")
         annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
         implementation("org.openapitools:jackson-databind-nullable:0.2.6")

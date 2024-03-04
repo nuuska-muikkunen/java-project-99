@@ -1,10 +1,14 @@
 package hexlet.code.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
@@ -18,8 +22,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-import static jakarta.persistence.GenerationType.SEQUENCE;
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "users")
@@ -29,8 +34,8 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 public class User implements UserDetails, BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = SEQUENCE)
-    private long id;
+    @GeneratedValue(strategy = IDENTITY)
+    private Long id;
 
     private String firstName;
 
@@ -49,6 +54,10 @@ public class User implements UserDetails, BaseEntity {
     private Instant updatedAt;
 
     private String passwordDigest;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "assignee", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private List<Task> tasks = new ArrayList<>();
 
     @Override
     public String getPassword() {

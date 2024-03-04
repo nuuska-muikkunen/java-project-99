@@ -1,9 +1,8 @@
 package hexlet.code.controller;
 
-import hexlet.code.dto.UserCreateDTO;
-import hexlet.code.dto.UserDTO;
-import hexlet.code.dto.UserUpdateDTO;
-import hexlet.code.repository.UserRepository;
+import hexlet.code.dto.user.UserCreateDTO;
+import hexlet.code.dto.user.UserDTO;
+import hexlet.code.dto.user.UserUpdateDTO;
 import hexlet.code.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -30,9 +29,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @GetMapping(value = "/users")
     ResponseEntity<List<UserDTO>> index() {
