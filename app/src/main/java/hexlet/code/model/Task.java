@@ -38,9 +38,9 @@ public class Task implements BaseEntity {
     @NotBlank
     private String title;
 
-    private Integer index;
-
     private String content;
+
+    private Integer index;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)

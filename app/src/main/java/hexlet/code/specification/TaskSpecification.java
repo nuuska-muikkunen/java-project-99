@@ -10,32 +10,32 @@ public class TaskSpecification {
     public Specification<Task> build(TaskParamsDTO params) {
         return withTitleCont(params.getTitleCont())
                 .and(withAssigneeId(params.getAssigneeId()))
-                .and(withSlug(params.getSlug()))
+                .and(withSlug(params.getStatus()))
                 .and(withLabelId(params.getLabelId()));
     }
 
     private Specification<Task> withTitleCont(String title) {
         return (root, query, cb) -> title == null
                 ? cb.conjunction()
-                : cb.like(cb.lower(root.get("title")), "%" + title + "%");
+                : cb.like(cb.lower(root.get("title")), "%" + title.toLowerCase() + "%");
     }
 
     private Specification<Task> withAssigneeId(Long assigneeId) {
             return (root, query, cb) -> assigneeId == null
                     ? cb.conjunction()
-                    : cb.equal(root.get("assigneeId"), assigneeId);
+                    : cb.equal(root.get("assignee").get("id"), assigneeId);
     }
 
-    private Specification<Task> withSlug(String slug) {
-            return (root, query, cb) -> slug == null
+    private Specification<Task> withSlug(String status) {
+            return (root, query, cb) -> status == null
                     ? cb.conjunction()
-                    : cb.equal(root.get("slug"), slug);
+                    : cb.equal(root.get("taskStatus").get("slug"), status);
     }
 
     private Specification<Task> withLabelId(Long labelId) {
             return (root, query, cb) -> labelId == null
                     ? cb.conjunction()
-                    : cb.equal(root.get("labelId"), labelId);
+                    : cb.equal(root.get("labels").get("id"), labelId);
     }
 
 }

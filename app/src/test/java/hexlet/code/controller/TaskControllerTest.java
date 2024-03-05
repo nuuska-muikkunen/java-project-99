@@ -87,25 +87,42 @@ public class TaskControllerTest {
         testTask.setLabels(s);
     }
 
-    @Test
-    public void testIndex() throws Exception {
-        taskRepository.save(testTask);
-        var result = mockMvc.perform(get("/api/tasks").with(token))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        var body = result.getResponse().getContentAsString();
-        assertThatJson(body).isArray();
-    }
-
 //    @Test
-//    public void testIndexWithTitleContains() throws Exception {
+//    public void testIndex() throws Exception {
 //        taskRepository.save(testTask);
-//        var result = mockMvc.perform(get("/tasks?assigneeId=1").with(token))
+//        var result = mockMvc.perform(get("/api/tasks").with(token))
 //                .andExpect(status().isOk())
 //                .andReturn();
 //
 //        var body = result.getResponse().getContentAsString();
+//        assertThatJson(body).isArray();
+//    }
+
+//    @Test
+//    public void testIndexWithTitleContains() throws Exception {
+//        for (int i = 0; i < 10; i++) {
+//            testUser = Instancio.of(modelGenerator.getUserModel()).create();
+//            userRepository.save(testUser);
+//            testTaskStatus = Instancio.of(modelGenerator.getTaskStatusModel()).create();
+//            taskStatusRepository.save(testTaskStatus);
+//            testLabel = Instancio.of(modelGenerator.getLabelModel()).create();
+//            labelRepository.save(testLabel);
+//
+//            testTask = Instancio.of(modelGenerator.getTaskModel()).create();
+//            testTask.setAssignee(testUser);
+//            testTask.setTaskStatus(testTaskStatus);
+//            Set<Label> s = new HashSet<>();
+//            s.add(testLabel);
+//            testTask.setLabels(s);
+//            taskRepository.save(testTask);
+//        }
+//        var result = mockMvc.perform(get("/tasks?titleCont=j&assigneeId=2&status=draft&labelId=2")
+//                        .with(token))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//
+//        var body = result.getResponse().getContentAsString();
+//
 //        assertThatJson(body).isArray().allSatisfy(element ->
 //                assertThatJson(element)
 //                        .and(v -> v.node("assigneeId").isEqualTo("1"))

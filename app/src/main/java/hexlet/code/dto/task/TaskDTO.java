@@ -15,6 +15,6 @@ public class TaskDTO {
     private String content;
     private String slug;
     private Long assigneeId;
-    private Set<Long> taskLabels;
+    private Set<Long> taskLabelIds;
     private Instant crestedAt;
 }

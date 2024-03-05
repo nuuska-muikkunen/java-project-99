@@ -46,6 +46,7 @@ public class ModelGenerator {
 
         taskModel = Instancio.of(Task.class)
                 .ignore(Select.field(Task::getId))
+                .ignore(Select.field(Task::getIndex))
                 .ignore(Select.field(Task::getAssignee))
                 .ignore(Select.field(Task::getTaskStatus))
                 .supply(Select.field(Task::getTitle), () -> faker.football().positions())

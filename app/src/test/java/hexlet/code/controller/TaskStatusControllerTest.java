@@ -49,7 +49,6 @@ public class TaskStatusControllerTest {
     public void setUp() {
         testTaskStatus = Instancio.of(modelGenerator.getTaskStatusModel()).create();
         token = jwt().jwt(builder -> builder.subject("hexlet@example.com"));
-//        taskStatusRepository.save(testTaskStatus);
     }
 
     @Test
@@ -87,8 +86,6 @@ public class TaskStatusControllerTest {
                 .with(token)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(om.writeValueAsString(dto));
-        System.out.println("taskStatus name= " + dto.getName());
-        System.out.println("taskStatus slug= " + dto.getSlug());
 
         mockMvc.perform(request)
                 .andExpect(status().isCreated());
