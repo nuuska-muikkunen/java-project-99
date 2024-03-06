@@ -22,8 +22,10 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: build --info
+#          arguments: build --info
           gradle-version: '8.6'
+      - name: Run build with Gradle Wrapper
+        run: ./gradlew build
       - name: Publish code coverage
         if: ${{ github.event_name == 'push' }}
         uses: paambaati/codeclimate-action@v5.0.0
