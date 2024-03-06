@@ -1,40 +1,38 @@
 DEFAULT_GOAL := build-run
 
 setup:
-	gradle wrapper --gradle-version 8.6
+	./gradle wrapper --gradle-version 8.6
+	./gradlew build
 
 app:
-	./app/gradlew -p app bootRun --args='--spring.profiles.active=dev'
+	./gradlew bootRun --args='--spring.profiles.active=production'
 
 clean:
-	./app/gradlew -p app clean
+	./gradlew clean
 
 build:
-	./app/gradlew -p app clean build
+	./gradlew clean build
 
 install:
-	./app/gradlew -p app clean installDist
+	./gradlew installDist
 
 run-dist:
-	./app/build/install/app/bin/app
+	./build/install/app/bin/app
 
 run:
-	./app/gradlew -p app run
+	./gradlew bootRun
 
 test:
-	./app/gradlew -p app test
+	./gradlew test
 
 report:
-	./app/gradlew -p app jacocoTestReport
+	./gradlew jacocoTestReport
 
 lint:
-	./app/gradlew -p app checkstyleMain
+	./gradlew checkstyleMain
 
 check-deps:
-	./app/gradlew -p app dependencyUpdates -Drevision=release
-
-build-run:
-	build run
+	./gradlew dependencyUpdates -Drevision=release
 
 .PHONY:
 	build
