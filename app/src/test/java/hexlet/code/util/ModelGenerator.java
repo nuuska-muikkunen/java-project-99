@@ -49,8 +49,8 @@ public class ModelGenerator {
                 .ignore(Select.field(Task::getIndex))
                 .ignore(Select.field(Task::getAssignee))
                 .ignore(Select.field(Task::getTaskStatus))
-                .supply(Select.field(Task::getTitle), () -> faker.football().positions())
-                .supply(Select.field(Task::getContent), () -> faker.text().text())
+                .supply(Select.field(Task::getName), () -> faker.football().positions())
+                .supply(Select.field(Task::getDescription), () -> faker.text().text())
                 .toModel();
     }
 }

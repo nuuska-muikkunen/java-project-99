@@ -36,9 +36,9 @@ public class Task implements BaseEntity {
     private Long id;
 
     @NotBlank
-    private String title;
+    private String name;
 
-    private String content;
+    private String description;
 
     private Integer index;
 

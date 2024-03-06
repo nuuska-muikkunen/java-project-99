@@ -12,9 +12,9 @@ import java.util.Set;
 public class TaskUpdateDTO {
 
     @NotBlank
-    private JsonNullable<String> title;
+    private JsonNullable<String> name;
     @NotBlank
-    private JsonNullable<String> content;
+    private JsonNullable<String> description;
     @NotBlank
     private JsonNullable<String> slug;
     @NotBlank

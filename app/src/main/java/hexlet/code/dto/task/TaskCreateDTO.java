@@ -9,11 +9,11 @@ import java.util.Set;
 @Setter
 @Getter
 public class TaskCreateDTO {
+    @NotNull
+    private String name;
+    @NotNull
+    private String description;
     private Integer index;
-    @NotNull
-    private String title;
-    @NotNull
-    private String content;
     @NotNull
     private String slug;
     @NotNull

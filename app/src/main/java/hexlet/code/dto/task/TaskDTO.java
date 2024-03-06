@@ -10,9 +10,9 @@ import java.util.Set;
 @Getter
 public class TaskDTO {
     private long id;
-    private String title;
+    private String name;
+    private String description;
     private Integer index;
-    private String content;
     private String slug;
     private Long assigneeId;
     private Set<Long> taskLabelIds;

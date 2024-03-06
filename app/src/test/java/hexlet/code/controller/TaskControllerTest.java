@@ -139,16 +139,16 @@ public class TaskControllerTest {
         var body = result.getResponse().getContentAsString();
 
         assertThatJson(body).and(
-                v -> v.node("title").isEqualTo(testTask.getTitle()),
-                v -> v.node("content").isEqualTo(testTask.getContent())
+                v -> v.node("name").isEqualTo(testTask.getName()),
+                v -> v.node("description").isEqualTo(testTask.getDescription())
         );
     }
 
     @Test
     public void testCreate() throws Exception {
         var dto = new TaskCreateDTO();
-        dto.setContent("task content");
-        dto.setTitle("task title");
+        dto.setDescription("task description");
+        dto.setName("task_name");
         dto.setAssigneeId(testUser.getId());
         dto.setSlug(testTaskStatus.getSlug());
 
@@ -160,19 +160,19 @@ public class TaskControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isCreated());
 
-        var testTask = taskRepository.findByTitle(dto.getTitle()).get();
+        var testTask = taskRepository.findByName(dto.getName()).get();
 
         assertThat(testTask).isNotNull();
-        assertThat(testTask.getTitle()).isEqualTo(dto.getTitle());
-        assertThat(testTask.getContent()).isEqualTo(dto.getContent());
+        assertThat(testTask.getName()).isEqualTo(dto.getName());
+        assertThat(testTask.getDescription()).isEqualTo(dto.getDescription());
     }
 
     @Test
     public void testPartialUpdate() throws Exception {
         taskRepository.save(testTask);
         var dto = new TaskUpdateDTO();
-        dto.setTitle(JsonNullable.of("updated title"));
-        dto.setContent(JsonNullable.of("updated content"));
+        dto.setName(JsonNullable.of("updated_name"));
+        dto.setDescription(JsonNullable.of("updated description"));
 
         var request = put("/api/tasks/{id}", testTask.getId())
                 .with(token)
@@ -182,10 +182,10 @@ public class TaskControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isOk());
 
-        var task = taskRepository.findByTitle("updated title").get();
+        var task = taskRepository.findByName("updated_name").get();
 
-        assertThat(task.getTitle()).isEqualTo("updated title");
-        assertThat(task.getContent()).isEqualTo("updated content");
+        assertThat(task.getName()).isEqualTo("updated_name");
+        assertThat(task.getDescription()).isEqualTo("updated description");
     }
 
     @Test

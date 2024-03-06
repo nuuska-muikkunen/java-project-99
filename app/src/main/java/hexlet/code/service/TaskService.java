@@ -40,9 +40,9 @@ public class TaskService {
     }
 
     public TaskDTO findTask(Long id) {
-        var tasks = taskRepository.findById(id)
+        var task = taskRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Task Not Found: " + id));
-        return taskMapper.map(tasks);
+        return taskMapper.map(task);
     }
 
     public TaskDTO createTask(TaskCreateDTO taskData) {
