@@ -23,6 +23,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: build
+          build-root-directory: .
       - name: Publish code coverage
         if: ${{ github.event_name == 'push' }}
         uses: paambaati/codeclimate-action@v5.0.0
