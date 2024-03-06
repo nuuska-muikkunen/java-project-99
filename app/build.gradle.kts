@@ -7,6 +7,7 @@ plugins {
         id("jacoco")
         id("org.springframework.boot") version "3.2.2"
         id("io.spring.dependency-management") version "1.1.4"
+        id("io.sentry.jvm.gradle") version "4.3.1"
         id("io.freefair.lombok") version "8.4"
 }
 
@@ -36,6 +37,22 @@ repositories {
         mavenCentral()
 }
 
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+}
+
+sentry {
+  // Generates a JVM (Java, Kotlin, etc.) source bundle and uploads your source code to Sentry.
+  // This enables source context, allowing you to see your source
+  // code as part of your stack traces in Sentry.
+  includeSourceContext.set(true)
+  org.set("hexlet-gq")
+  projectName.set("java-spring-boot")
+  authToken = System.getenv("SENTRY_AUTH_TOKEN")
+}
+
 dependencies {
         implementation("org.springframework.boot:spring-boot-starter")
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -46,8 +63,11 @@ dependencies {
         implementation("org.springframework.boot:spring-boot-devtools")
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
         implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
-        // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
         implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+        // https://mvnrepository.com/artifact/io.sentry/sentry-spring-boot-starter
+        implementation("io.sentry:sentry-spring-boot-starter:7.5.0")
+        // https://mvnrepository.com/artifact/io.sentry/sentry-spring-boot-starter-jakarta
+        implementation("io.sentry:sentry-spring-boot-starter-jakarta:7.5.0")
         implementation("org.mapstruct:mapstruct:1.5.5.Final")
         annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
         implementation("org.openapitools:jackson-databind-nullable:0.2.6")
@@ -68,6 +88,10 @@ dependencies {
         testImplementation("org.jacoco:org.jacoco.core:0.8.10")
 }
 
+tasks.sentryBundleSourcesJava {
+         enabled = System.getenv("SENTRY_AUTH_TOKEN") != null
+}
+
 tasks.jacocoTestReport {
         reports {
                 xml.required = true
@@ -82,5 +106,4 @@ tasks.withType<Test> {
                 events = mutableSetOf(TestLogEvent.FAILED, TestLogEvent.PASSED, TestLogEvent.SKIPPED)
                 showStandardStreams = true
         }
-
 }

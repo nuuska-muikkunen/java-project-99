@@ -78,6 +78,5 @@ public class DataInitializer implements ApplicationRunner {
         var labelFeature = new Label();
         labelFeature.setName("feature");
         labelRepository.save(labelFeature);
-     }
-
+    }
 }
