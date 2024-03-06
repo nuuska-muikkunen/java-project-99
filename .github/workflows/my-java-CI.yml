@@ -22,7 +22,7 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: build
+          arguments: build --info
           gradle-version: '8.6'
       - name: Publish code coverage
         if: ${{ github.event_name == 'push' }}
