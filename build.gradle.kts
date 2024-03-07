@@ -23,8 +23,8 @@ java {
 }
 
 checkstyle {
-    configFile = file("config/checkstyle/checkstyle.xml")
-    toolVersion = "10.13.0"    // your choice here
+        configFile = file("config/checkstyle/checkstyle.xml")
+        toolVersion = "10.13.0"    // your choice here
 }
 
 configurations {
@@ -38,19 +38,16 @@ repositories {
 }
 
 buildscript {
-  repositories {
-    mavenCentral()
-  }
+        repositories {
+                mavenCentral()
+        }
 }
 
 sentry {
-  // Generates a JVM (Java, Kotlin, etc.) source bundle and uploads your source code to Sentry.
-  // This enables source context, allowing you to see your source
-  // code as part of your stack traces in Sentry.
-  includeSourceContext.set(true)
-  org.set("hexlet-gq")
-  projectName.set("java-spring-boot")
-  authToken = System.getenv("SENTRY_AUTH_TOKEN")
+        includeSourceContext.set(true)
+        org.set("hexlet-gq")
+        projectName.set("java-spring-boot")
+        authToken = System.getenv("SENTRY_AUTH_TOKEN")
 }
 
 dependencies {
@@ -64,9 +61,7 @@ dependencies {
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
         implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
         implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
-        // https://mvnrepository.com/artifact/io.sentry/sentry-spring-boot-starter
         implementation("io.sentry:sentry-spring-boot-starter:7.5.0")
-        // https://mvnrepository.com/artifact/io.sentry/sentry-spring-boot-starter-jakarta
         implementation("io.sentry:sentry-spring-boot-starter-jakarta:7.5.0")
         implementation("org.mapstruct:mapstruct:1.5.5.Final")
         annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
@@ -89,7 +84,7 @@ dependencies {
 }
 
 tasks.sentryBundleSourcesJava {
-         enabled = System.getenv("SENTRY_AUTH_TOKEN") != null
+        enabled = System.getenv("SENTRY_AUTH_TOKEN") != null
 }
 
 tasks.jacocoTestReport {
