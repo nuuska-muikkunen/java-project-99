@@ -139,18 +139,18 @@ public class TaskControllerTest {
         var body = result.getResponse().getContentAsString();
 
         assertThatJson(body).and(
-                v -> v.node("name").isEqualTo(testTask.getName()),
-                v -> v.node("description").isEqualTo(testTask.getDescription())
+                v -> v.node("title").isEqualTo(testTask.getName()),
+                v -> v.node("content").isEqualTo(testTask.getDescription())
         );
     }
 
     @Test
     public void testCreate() throws Exception {
         var dto = new TaskCreateDTO();
-        dto.setDescription("task description");
-        dto.setName("task_name");
+        dto.setContent("task description");
+        dto.setTitle("task_name");
         dto.setAssigneeId(testUser.getId());
-        dto.setSlug(testTaskStatus.getSlug());
+        dto.setStatus(testTaskStatus.getSlug());
 
         var request = post("/api/tasks")
                 .with(token)
@@ -160,19 +160,19 @@ public class TaskControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isCreated());
 
-        var testTask = taskRepository.findByName(dto.getName()).get();
+        var testTask = taskRepository.findByName(dto.getTitle()).get();
 
         assertThat(testTask).isNotNull();
-        assertThat(testTask.getName()).isEqualTo(dto.getName());
-        assertThat(testTask.getDescription()).isEqualTo(dto.getDescription());
+        assertThat(testTask.getName()).isEqualTo(dto.getTitle());
+        assertThat(testTask.getDescription()).isEqualTo(dto.getContent());
     }
 
     @Test
     public void testPartialUpdate() throws Exception {
         taskRepository.save(testTask);
         var dto = new TaskUpdateDTO();
-        dto.setName(JsonNullable.of("updated_name"));
-        dto.setDescription(JsonNullable.of("updated description"));
+        dto.setTitle(JsonNullable.of("updated_name"));
+        dto.setContent(JsonNullable.of("updated description"));
 
         var request = put("/api/tasks/{id}", testTask.getId())
                 .with(token)

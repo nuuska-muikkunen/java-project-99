@@ -10,12 +10,12 @@ import java.util.Set;
 @Getter
 public class TaskCreateDTO {
     @NotNull
-    private String name;
+    private String title;
     @NotNull
-    private String description;
+    private String content;
     private Integer index;
     @NotNull
-    private String slug;
+    private String status;
     @NotNull
     private Long assigneeId;
     private Set<Long> taskLabelIds;

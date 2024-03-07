@@ -36,25 +36,33 @@ public abstract class TaskMapper {
     @Autowired
     private TaskStatusRepository taskStatusRepository;
 
+    @Mapping(source = "title", target = "name")
+    @Mapping(source = "content", target = "description")
     @Mapping(source = "assigneeId", target = "assignee")
-    @Mapping(source = "slug", target = "taskStatus", qualifiedByName = "slugToTaskStatus")
+    @Mapping(source = "status", target = "taskStatus", qualifiedByName = "statusToTaskStatus")
     @Mapping(source = "taskLabelIds", target = "labels", qualifiedByName = "idsToLabels")
     public abstract Task map(TaskCreateDTO model);
 
+
+    @Mapping(source = "name", target = "title")
+    @Mapping(source = "description", target = "content")
     @Mapping(source = "assignee.id", target = "assigneeId")
-    @Mapping(source = "taskStatus.slug", target = "slug")
+    @Mapping(source = "taskStatus.slug", target = "status")
     @Mapping(source = "labels", target = "taskLabelIds", qualifiedByName = "labelsToIds")
     public abstract TaskDTO map(Task model);
 
+
+    @Mapping(source = "title", target = "name")
+    @Mapping(source = "content", target = "description")
     @Mapping(source = "assigneeId", target = "assignee")
-    @Mapping(source = "slug", target = "taskStatus", qualifiedByName = "slugToTaskStatus")
+    @Mapping(source = "status", target = "taskStatus", qualifiedByName = "statusToTaskStatus")
     @Mapping(source = "taskLabelIds", target = "labels", qualifiedByName = "idsToLabels")
     public abstract void update(TaskUpdateDTO update, @MappingTarget Task destination);
 
-    @Named("slugToTaskStatus")
-    public TaskStatus slugToTaskStatus(String slug) {
-        return taskStatusRepository.findBySlug(slug)
-                .orElseThrow(() -> new ResourceNotFoundException("TaskStatus with slug " + slug + " not found"));
+    @Named("statusToTaskStatus")
+    public TaskStatus statusToTaskStatus(String status) {
+        return taskStatusRepository.findBySlug(status)
+                .orElseThrow(() -> new ResourceNotFoundException("TaskStatus with slug " + status + " not found"));
     }
 
     @Named("idsToLabels")

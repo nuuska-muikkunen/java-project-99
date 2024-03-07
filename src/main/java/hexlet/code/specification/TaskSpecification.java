@@ -8,16 +8,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskSpecification {
     public Specification<Task> build(TaskParamsDTO params) {
-        return withNameCont(params.getNameCont())
+        return withNameCont(params.getTitleCont())
                 .and(withAssigneeId(params.getAssigneeId()))
                 .and(withSlug(params.getStatus()))
                 .and(withLabelId(params.getLabelId()));
     }
 
-    private Specification<Task> withNameCont(String namecheck) {
-        return (root, query, cb) -> namecheck == null
+    private Specification<Task> withNameCont(String content) {
+        return (root, query, cb) -> content == null
                 ? cb.conjunction()
-                : cb.like(cb.lower(root.get("name")), "%" + namecheck.toLowerCase() + "%");
+                : cb.like(cb.lower(root.get("name")), "%" + content.toLowerCase() + "%");
     }
 
     private Specification<Task> withAssigneeId(Long assigneeId) {
