@@ -55,5 +55,5 @@ public class Task implements BaseEntity {
 
     @Column(name = "created_at")
     @CreatedDate
-    private Instant crestedAt;
+    private Instant createdAt;
 }
