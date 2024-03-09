@@ -30,7 +30,7 @@ public class TaskStatusController {
     private TaskStatusService taskStatusService;
 
     @GetMapping(value = "/task_statuses")
-    ResponseEntity<List<TaskStatusDTO>> index() {
+    public ResponseEntity<List<TaskStatusDTO>> index() {
         var taskStatuses = taskStatusService.getAll();
         return ResponseEntity.ok()
                 .header("X-Total-Count", String.valueOf(taskStatuses.size()))
@@ -38,13 +38,13 @@ public class TaskStatusController {
     }
 
     @GetMapping(value = "/task_statuses/{id}")
-    TaskStatusDTO show(@PathVariable Long id) {
+    public TaskStatusDTO show(@PathVariable Long id) {
         return taskStatusService.findTaskStatus(id);
     }
 
     @PostMapping(value = "/task_statuses")
     @ResponseStatus(HttpStatus.CREATED)
-    TaskStatusDTO create(@Valid @RequestBody TaskStatusCreateDTO taskStatusData) {
+    public TaskStatusDTO create(@Valid @RequestBody TaskStatusCreateDTO taskStatusData) {
         return taskStatusService.createTaskStatus(taskStatusData);
     }
 

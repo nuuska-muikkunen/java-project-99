@@ -30,7 +30,7 @@ public class LabelController {
     private LabelService labelService;
 
     @GetMapping(value = "/labels")
-    ResponseEntity<List<LabelDTO>> index() {
+    public ResponseEntity<List<LabelDTO>> index() {
         var labels = labelService.getAll();
         return ResponseEntity.ok()
                 .header("X-Total-Count", String.valueOf(labels.size()))
@@ -38,13 +38,13 @@ public class LabelController {
     }
 
     @GetMapping(value = "/labels/{id}")
-    LabelDTO show(@PathVariable Long id) {
+    public LabelDTO show(@PathVariable Long id) {
         return labelService.findLabel(id);
     }
 
     @PostMapping(value = "/labels")
     @ResponseStatus(HttpStatus.CREATED)
-    LabelDTO create(@Valid @RequestBody LabelCreateDTO labelData) {
+    public LabelDTO create(@Valid @RequestBody LabelCreateDTO labelData) {
         return labelService.createLabel(labelData);
     }
 

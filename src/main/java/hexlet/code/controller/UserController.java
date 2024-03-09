@@ -31,21 +31,22 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(value = "/users")
-    ResponseEntity<List<UserDTO>> index() {
-        var users = userService.getAll();
-        return ResponseEntity.ok()
+        public ResponseEntity<List<UserDTO>> index() {
+        List<UserDTO> users = userService.getAll();
+        return ResponseEntity
+                .ok()
                 .header("X-Total-Count", String.valueOf(users.size()))
                 .body(users);
     }
 
     @GetMapping(value = "/users/{id}")
-    UserDTO show(@PathVariable Long id) {
+    public UserDTO show(@PathVariable Long id) {
         return userService.findUser(id);
     }
 
     @PostMapping(value = "/users")
     @ResponseStatus(HttpStatus.CREATED)
-    UserDTO create(@Valid @RequestBody UserCreateDTO userData) {
+    public UserDTO create(@Valid @RequestBody UserCreateDTO userData) {
         return userService.createUser(userData);
     }
 

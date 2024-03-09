@@ -108,10 +108,6 @@ public class TaskStatusControllerTest {
                 .with(token)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(om.writeValueAsString(dto));
-        System.out.println(testTaskStatus.getId());
-        System.out.println(testTaskStatus.getName());
-        System.out.println(testTaskStatus.getSlug());
-        System.out.println(testTaskStatus.getCreatedAt());
 
         mockMvc.perform(request)
                 .andExpect(status().isOk());

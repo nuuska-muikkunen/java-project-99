@@ -141,8 +141,8 @@ public class TaskControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
         var body = result.getResponse().getContentAsString();
-
-        assertThatJson(body).and(
+        assertThatJson(body)
+                .and(
                 v -> v.node("title").isEqualTo(testTask.getName()),
                 v -> v.node("content").isEqualTo(testTask.getDescription())
         );

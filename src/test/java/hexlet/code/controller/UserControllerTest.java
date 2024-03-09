@@ -81,8 +81,7 @@ public class UserControllerTest {
                 v -> v.node("firstName").isEqualTo(testUser.getFirstName()),
                 v -> v.node("lastName").isEqualTo(testUser.getLastName()),
                 v -> v.node("email").isEqualTo(testUser.getEmail()),
-                v -> v.node("email").isEqualTo(testUser.getUsername())
-        );
+                v -> v.node("email").isEqualTo(testUser.getUsername()));
     }
 
     @Test
