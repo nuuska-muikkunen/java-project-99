@@ -10,5 +10,5 @@ import java.time.Instant;
 public class LabelDTO {
     private long id;
     private String name;
-    private Instant crestedAt;
+    private Instant createdAt;
 }
