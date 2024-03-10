@@ -11,6 +11,6 @@ import java.time.Instant;
 public class LabelDTO {
     private long id;
     private String name;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss", timezone = "UTC+3")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC+6")
     private Instant createdAt;
 }

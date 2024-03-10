@@ -12,6 +12,6 @@ public class TaskStatusDTO {
     private Long id;
     private String name;
     private String slug;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss", timezone = "UTC+3")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC+6")
     private Instant createdAt;
 }
