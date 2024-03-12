@@ -7,10 +7,8 @@ import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.model.Label;
 import hexlet.code.model.Task;
 import hexlet.code.model.TaskStatus;
-import hexlet.code.model.User;
 import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.TaskStatusRepository;
-import hexlet.code.repository.UserRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -36,9 +34,6 @@ public abstract class TaskMapper {
     private LabelRepository labelRepository;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private TaskStatusRepository taskStatusRepository;
 
     @Mapping(source = "title", target = "name")
@@ -48,7 +43,6 @@ public abstract class TaskMapper {
     @Mapping(source = "taskLabelIds", target = "labels", qualifiedByName = "idsToLabels")
     public abstract Task map(TaskCreateDTO model);
 
-
     @Mapping(source = "name", target = "title")
     @Mapping(source = "description", target = "content")
     @Mapping(source = "assignee.id", target = "assigneeId")
@@ -56,10 +50,9 @@ public abstract class TaskMapper {
     @Mapping(source = "labels", target = "taskLabelIds", qualifiedByName = "labelsToIds")
     public abstract TaskDTO map(Task model);
 
-
     @Mapping(source = "title", target = "name")
     @Mapping(source = "content", target = "description")
-    @Mapping(source = "assigneeId", target = "assignee", qualifiedByName = "idToUser")
+    @Mapping(source = "assigneeId", target = "assignee")
     @Mapping(source = "status", target = "taskStatus", qualifiedByName = "statusToTaskStatus")
     @Mapping(source = "taskLabelIds", target = "labels", qualifiedByName = "idsToLabels")
     public abstract void update(TaskUpdateDTO update, @MappingTarget Task destination);
@@ -68,12 +61,6 @@ public abstract class TaskMapper {
     public TaskStatus statusToTaskStatus(String status) {
         return taskStatusRepository.findBySlug(status)
                 .orElseThrow(() -> new ResourceNotFoundException("TaskStatus with slug " + status + " not found"));
-    }
-
-    @Named("idToUser")
-    public User idToUser(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
     }
 
     @Named("idsToLabels")
