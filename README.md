@@ -6,7 +6,7 @@
 
 ### Application web site
 [TASK MANAGER]:
-https://java-project-99-3hfo.onrender.com/
+https://java-project-99-lmwc.onrender.com/
 [TASK MANAGER]
 
 ### Hexlet tests and linter status:
