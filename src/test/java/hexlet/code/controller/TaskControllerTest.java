@@ -74,21 +74,21 @@ public class TaskControllerTest {
     @BeforeEach
     public void setUp() {
         testUser = Instancio.of(modelGenerator.getUserModel()).create();
-        userRepository.save(testUser); //*********************
+        userRepository.save(testUser);
         token = jwt().jwt(builder -> builder.subject(testUser.getEmail()));
 
         testTaskStatus = Instancio.of(modelGenerator.getTaskStatusModel()).create();
-        taskStatusRepository.save(testTaskStatus); //*********************
+        taskStatusRepository.save(testTaskStatus);
 
         testLabel = Instancio.of(modelGenerator.getLabelModel()).create();
-        labelRepository.save(testLabel); //*********************
+        labelRepository.save(testLabel);
 
         testTask = Instancio.of(modelGenerator.getTaskModel()).create();
-        testTask.setTaskStatus(testTaskStatus); //*********************
-        testTask.setAssignee(testUser); //*********************
+        testTask.setTaskStatus(testTaskStatus);
+        testTask.setAssignee(testUser);
         Set<Label> s = new HashSet<>();
         s.add(testLabel);
-        testTask.setLabels(s); //*********************
+        testTask.setLabels(s);
     }
 
     @Test
@@ -206,7 +206,7 @@ public class TaskControllerTest {
         assertThat(taskRepository.existsById(testTask.getId())).isEqualTo(false);
     }
 
-     @AfterEach
+    @AfterEach
     public void clean() {
         taskRepository.deleteAll();
         labelRepository.deleteAll();

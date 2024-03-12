@@ -2,6 +2,7 @@ package hexlet.code.specification;
 
 import hexlet.code.dto.task.TaskParamsDTO;
 import hexlet.code.model.Task;
+import jakarta.persistence.criteria.JoinType;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
@@ -23,19 +24,19 @@ public class TaskSpecification {
     private Specification<Task> withAssigneeId(Long assigneeId) {
             return (root, query, cb) -> assigneeId == null
                     ? cb.conjunction()
-                    : cb.equal(root.get("assignee").get("id"), assigneeId);
+                    : cb.equal(root.join("assignee", JoinType.INNER).get("id"), assigneeId);
     }
 
     private Specification<Task> withSlug(String status) {
             return (root, query, cb) -> status == null
                     ? cb.conjunction()
-                    : cb.equal(root.get("taskStatus").get("slug"), status);
+                    : cb.equal(root.join("taskStatus", JoinType.INNER).get("slug"), status);
     }
 
     private Specification<Task> withLabelId(Long labelId) {
             return (root, query, cb) -> labelId == null
                     ? cb.conjunction()
-                    : cb.equal(root.get("labels").get("id"), labelId);
+                    : cb.equal(root.join("labels", JoinType.INNER).get("id"), labelId);
     }
 
 }
