@@ -3,6 +3,7 @@ package hexlet.code.service;
 import hexlet.code.dto.status.TaskStatusCreateDTO;
 import hexlet.code.dto.status.TaskStatusDTO;
 import hexlet.code.dto.status.TaskStatusUpdateDTO;
+import hexlet.code.exception.ParentEntityExistsException;
 import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.TaskStatusMapper;
 import hexlet.code.repository.TaskStatusRepository;
@@ -49,7 +50,14 @@ public class TaskStatusService {
     }
 
     public void deleteTaskStatus(Long id) {
-        taskStatusRepository.deleteById(id);
+        var taskStatus = taskStatusRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("TaskStatus with id " + id + " not found"));
+        if (taskStatus.getTasks().isEmpty()) {
+            taskStatusRepository.deleteById(id);
+        } else {
+            throw new ParentEntityExistsException("TaskStatus with id " + id
+                    + " is assigned to existing Task and can't be destroyed");
+        }
     }
 
 

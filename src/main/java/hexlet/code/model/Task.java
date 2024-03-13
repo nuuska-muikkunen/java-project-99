@@ -47,10 +47,10 @@ public class Task implements BaseEntity {
     private TaskStatus taskStatus;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private User assignee;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private Set<Label> labels = new HashSet<>();
 
     @Column(name = "created_at")

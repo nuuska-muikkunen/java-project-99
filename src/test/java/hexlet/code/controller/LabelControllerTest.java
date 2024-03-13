@@ -116,6 +116,7 @@ public class LabelControllerTest {
         var label = labelRepository.findByName("start").get();
 
         assertThat(label.getName()).isEqualTo("start");
+        assertThat(label.getTasks().size()).isEqualTo(testLabel.getTasks().size());
     }
 
     @Test

@@ -41,7 +41,7 @@ public class Label implements BaseEntity {
     @ToString.Include
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "labels", cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "labels", cascade = CascadeType.MERGE)
     private Set<Task> tasks = new HashSet<>();
 
     @CreatedDate

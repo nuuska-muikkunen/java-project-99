@@ -129,7 +129,7 @@ public class TaskControllerTest {
         var body = result.getResponse().getContentAsString();
         assertThatJson(body).isArray().allSatisfy(element ->
                 assertThatJson(element)
-                        .and(v -> v.node("assigneeId").isEqualTo(id))
+                        .and(v -> v.node("assignee_id").isEqualTo(id))
         );
     }
 
@@ -193,6 +193,9 @@ public class TaskControllerTest {
 
         assertThat(task.getName()).isEqualTo("updated_name");
         assertThat(task.getDescription()).isEqualTo("updated description");
+        assertThat(task.getAssignee().getUsername()).isEqualTo(testTask.getAssignee().getUsername());
+        assertThat(task.getLabels().size()).isEqualTo(testTask.getLabels().size());
+        assertThat(task.getTaskStatus().getSlug()).isEqualTo(testTask.getTaskStatus().getSlug());
     }
 
     @Test

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hexlet.code.dto.status.TaskStatusCreateDTO;
 import hexlet.code.dto.status.TaskStatusUpdateDTO;
 import hexlet.code.model.TaskStatus;
+import hexlet.code.repository.TaskRepository;
 import hexlet.code.repository.TaskStatusRepository;
 import hexlet.code.util.ModelGenerator;
 import org.instancio.Instancio;
@@ -40,6 +41,9 @@ public class TaskStatusControllerTest {
 
     @Autowired
     private TaskStatusRepository taskStatusRepository;
+
+    @Autowired
+    private TaskRepository taskRepository;
 
     private SecurityMockMvcRequestPostProcessors.JwtRequestPostProcessor token;
 
@@ -127,6 +131,23 @@ public class TaskStatusControllerTest {
                 .andExpect(status().isNoContent());
 
         assertThat(taskStatusRepository.existsById(testTaskStatus.getId())).isEqualTo(false);
+    }
+
+    @Test
+    public void testRestrictedDestroy() throws Exception {
+        var testTask = Instancio.of(modelGenerator.getTaskModel()).create();
+        testTask.setTaskStatus(testTaskStatus);
+        taskStatusRepository.save(testTaskStatus);
+        taskRepository.save(testTask);
+
+        var request = delete("/api/task_statuses/{id}", testTaskStatus.getId())
+                .with(token);
+
+        var result = mockMvc.perform(request)
+                .andExpect(status().isConflict())
+                .andReturn().getResolvedException().getMessage();
+
+        assertThat(result).contains("is assigned to existing Task and can't be destroyed");
     }
 
 }

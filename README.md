@@ -2,12 +2,14 @@
 
 **TASK MANAGER** -  система управления задачами, подобная [http://www.redmine.org/](http://www.redmine.org/). Она позволяет ставить задачи, назначать исполнителей и менять их статусы.
 
-Для работы с системой требуется регистрация и аутентификация.
-
 ### Application web site
 [TASK MANAGER]:
 https://java-project-99-lmwc.onrender.com/
 [TASK MANAGER]
+
+Для входа в систему требуется регистрация и аутентификация:
+**login:** hexlet@example.com
+**password:** qwerty
 
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/nuuska-muikkunen/java-project-99/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/nuuska-muikkunen/java-project-99/actions)
