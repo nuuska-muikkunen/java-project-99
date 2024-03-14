@@ -144,7 +144,7 @@ public class TaskStatusControllerTest {
                 .with(token);
 
         var result = mockMvc.perform(request)
-                .andExpect(status().isConflict())
+                .andExpect(status().isForbidden())
                 .andReturn().getResolvedException().getMessage();
 
         assertThat(result).contains("is assigned to existing Task and can't be destroyed");

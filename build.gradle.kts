@@ -60,7 +60,7 @@ dependencies {
         implementation("org.springframework.boot:spring-boot-devtools")
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
         implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
-        implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+        implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0")
         implementation("io.sentry:sentry-spring-boot-starter:7.5.0")
         implementation("io.sentry:sentry-spring-boot-starter-jakarta:7.5.0")
         implementation("org.mapstruct:mapstruct:1.5.5.Final")
