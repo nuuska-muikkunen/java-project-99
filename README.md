@@ -1,4 +1,4 @@
-# Web Page Analyser
+# Task Manager
 
 **TASK MANAGER** -  система управления задачами, подобная [http://www.redmine.org/](http://www.redmine.org/). Она позволяет ставить задачи, назначать исполнителей и менять их статусы.
 
